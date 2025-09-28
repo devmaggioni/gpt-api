@@ -35,6 +35,7 @@ export async function gptRoutesV1(app: FastifyInstance) {
           systemPrompt: safeParse.data.systemPrompt,
           userPrompt: safeParse.data.userPrompt,
           useMemory: safeParse.data.useMemory ?? false,
+          userId: safeParse.data.userId,
         });
         if (data.r) {
           return res.code(200).send({
