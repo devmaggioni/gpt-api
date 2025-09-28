@@ -39,7 +39,7 @@ export async function gptRoutesV1(app: FastifyInstance) {
         if (data.r) {
           return res.code(200).send({
             statusCode: 200,
-            response: data.value.response,
+            data: data.value,
           });
         }
         return res.code(500).send({

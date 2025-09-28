@@ -84,7 +84,7 @@ export async function talkWithGPT(config: TRequestSchema): Promise<
         );
       }
 
-      if (config.userId) {
+      if (config.useMemory) {
         return right({
           response,
           history: conversationHistory.get(userId) || [],
