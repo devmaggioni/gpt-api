@@ -1,0 +1,35 @@
+{
+  "type": "module",
+  "name": "gpt-api",
+  "version": "1.0.0",
+  "description": "Uma API REST construída com Fastify que interage com o modelo GPT da OpenAI.",
+  "main": "index.js",
+  "types": "node",
+  "scripts": {
+    "start": "node dist/index",
+    "dev": "tsx --watch src/index.ts",
+    "build": "tsc",
+    "nodemon": "nodemon",
+    "prisma:migrate": "npx prisma migrate dev --name test-migration"
+  },
+  "keywords": [],
+  "author": "Gabriel Maggioni",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^24.3.0",
+    "nodemon": "^3.1.10",
+    "prisma": "^6.14.0",
+    "sqlite": "^5.1.1",
+    "tsx": "^4.20.6",
+    "typescript": "^5.9.2"
+  },
+  "dependencies": {
+    "@devmaggioni/either-monad": "^1.0.4",
+    "@fastify/cors": "^11.1.0",
+    "@prisma/client": "^6.14.0",
+    "dotenv": "^17.2.2",
+    "fastify": "^5.5.0",
+    "openai": "^5.23.1",
+    "zod": "^3.23.8"
+  }
+}
