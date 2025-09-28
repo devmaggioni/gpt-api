@@ -36,7 +36,10 @@ export async function talkWithGPT(config: TRequestSchema): Promise<
 
   if (!conversationHistory.has(userId)) {
     conversationHistory.set(userId, [
-      { role: "system", content: config.systemPrompt },
+      {
+        role: "system",
+        content: config.systemPrompt || "Um assistente prestativo",
+      },
     ]);
   }
 

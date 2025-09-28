@@ -1,7 +1,7 @@
 import { z } from "zod";
 
 export const requestSchema = z.object({
-  systemPrompt: z.string().min(1),
+  systemPrompt: z.string().min(1).optional(),
   userPrompt: z.string().min(1),
   model: z.string().min(1).optional(),
   temperature: z.number().positive().max(1).optional(),
