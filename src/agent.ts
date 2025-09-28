@@ -1,6 +1,6 @@
 import OpenAI from "openai";
 import { left, right, type Either } from "@devmaggioni/either-monad";
-import type { TRequestSchema } from "./zodSchemas";
+import type { TRequestSchema } from "./zodSchemas.js";
 
 type TAssistantResponse = {
   role: "assistant";

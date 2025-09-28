@@ -1,8 +1,8 @@
 import "dotenv/config";
 import Fastify from "fastify";
 import fastifyCors from "@fastify/cors";
-import { gptRoutesV1 } from "./routes/v1/gpt";
-import { healthRoute } from "./routes/health";
+import { gptRoutesV1 } from "./routes/v1/gpt.js";
+import { healthRoute } from "./routes/health.js";
 
 const app = Fastify({ logger: process.env.NODE_ENV === "development" });
 

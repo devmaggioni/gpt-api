@@ -1,6 +1,6 @@
 import type { FastifyInstance } from "fastify";
-import { requestSchema } from "../../zodSchemas";
-import { talkWithGPT } from "../../agent";
+import { requestSchema } from "../../zodSchemas.js";
+import { talkWithGPT } from "../../agent.js";
 
 export async function gptRoutesV1(app: FastifyInstance) {
   app.post(
