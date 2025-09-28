@@ -3,6 +3,46 @@ import { requestSchema } from "../../zodSchemas.js";
 import { resetHistory, talkWithGPT } from "../../agent.js";
 
 export async function gptRoutesV1(app: FastifyInstance) {
+  app.delete(
+    "/v1/gpt",
+    {
+      preHandler: (req, res, done) => {
+        const key = (req.query as { apiKey?: string }).apiKey;
+        if (key !== process.env.APP_API_KEY) {
+          res.status(401).send({
+            statusCode: 401,
+            error: "Unauthorized",
+            details: "Missing apiKey",
+          });
+          return;
+        }
+
+        done();
+      },
+    },
+    async (req, res) => {
+      const { userId } = req.query as {
+        userId: string;
+      };
+
+      if (!userId)
+        return res.code(400).send({
+          statusCode: 400,
+          error: "userId is not provided",
+        });
+      const reset = resetHistory(userId);
+      if (reset)
+        return res.code(200).send({
+          statusCode: 200,
+          message: "ok",
+        });
+      return res.code(400).send({
+        statusCode: 400,
+        message: `user ${userId} history could not be deleted`,
+      });
+    }
+  );
+
   app.post(
     "/v1/gpt",
     {
