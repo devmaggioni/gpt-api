@@ -1,6 +1,6 @@
 import type { FastifyInstance } from "fastify";
 import { requestSchema } from "../../zodSchemas.js";
-import { talkWithGPT } from "../../agent.js";
+import { resetHistory, talkWithGPT } from "../../agent.js";
 
 export async function gptRoutesV1(app: FastifyInstance) {
   app.post(
@@ -30,12 +30,16 @@ export async function gptRoutesV1(app: FastifyInstance) {
         });
 
       try {
+        if (safeParse.data.resetHistory && safeParse.data.userId) {
+          resetHistory(safeParse.data.userId);
+        }
         const data = await talkWithGPT({
           temperature: Number(safeParse.data.temperature) ?? null,
           systemPrompt: safeParse.data.systemPrompt,
           userPrompt: safeParse.data.userPrompt,
           useMemory: safeParse.data.useMemory ?? false,
           userId: safeParse.data.userId,
+          model: safeParse.data.model,
         });
         if (data.r) {
           return res.code(200).send({

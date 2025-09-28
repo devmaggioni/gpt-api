@@ -7,6 +7,7 @@ export const requestSchema = z.object({
   temperature: z.number().positive().max(1).optional(),
   useMemory: z.boolean().optional(),
   userId: z.string().optional(),
+  resetHistory: z.boolean().optional(),
 });
 
 export type TRequestSchema = z.infer<typeof requestSchema>;
