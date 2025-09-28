@@ -47,7 +47,7 @@ export async function talkWithGPT(config: TRequestSchema): Promise<
   }
 
   const history = config.useMemory
-    ? conversationHistory.get(userId)!
+    ? (conversationHistory.get(userId)! as any)
     : [
         { role: "system", content: config.systemPrompt ?? "" },
         { role: "user", content: config.userPrompt },
@@ -84,10 +84,13 @@ export async function talkWithGPT(config: TRequestSchema): Promise<
         );
       }
 
-      return right({
-        response,
-        history: config.useMemory ? conversationHistory.get(userId) : undefined,
-      });
+      if (config.userId) {
+        return right({
+          response,
+          history: conversationHistory.get(userId) || [],
+        });
+      }
+      return right({ response });
     }
 
     return left(
